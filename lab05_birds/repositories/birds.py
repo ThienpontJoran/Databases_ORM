@@ -7,7 +7,12 @@ class BirdRepository:
         self.session = session
 
     def get_all(self):
-        statement = select(Bird)
+        statement = select(Bird).join(Species)
+        print(statement)
+
+        items = self.session.exec(statement).all()
+        print(items)
+        
         return self.session.exec(statement).all()
 
     def insert(self, payload: BirdCreate):
